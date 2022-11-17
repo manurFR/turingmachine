@@ -29,7 +29,7 @@ Will produce a 5-verifiers problems taken from all the available verifiers but i
 
 ### In practice :
 
-    python turing.py 5 HARD --include-verifiers 26
+    $ python turing.py 5 HARD --include-verifiers 26
     (nb tries: 151)
     Verifiers: 7 [pound: 613] | 26 [pound: 224] | 31 [pound: 595] | 36 [pound: 439] | 42 [pound: 406]
     Ready to see the solution code ? (y/N) y
