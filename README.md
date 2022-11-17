@@ -43,7 +43,7 @@ The answer (the code and the relevant criteria that each verifier tests) will on
 
 ## Usage : finding all valid solutions for a set of verifiers
 
-    $ python turing.py --getcodes 7 15 25 32
+    $ python turing.py --getcodes 7 13 24 32
 Will list all the codes that work for the given verifiers numbers, and the good criteria (from the list on the card) that each verifier tests.
 
 A set of verifiers can have multiple codes that work as a solution.
@@ -52,7 +52,7 @@ It can even have a code that works with different combinations of criterias ; it
 
 ### Example
 
-    python turing.py --getcodes 7 13 24 32
+    $ python turing.py --getcodes 7 13 24 32
     Code: 344 | Criterias: v07_purple_even, v13_yellow_eq_purple, v24_two_consecutive_asc, v32_yellow_gt_3
     Code: 344 | Criterias: v07_purple_even, v13_yellow_eq_purple, v24_two_consecutive_asc, v32_purple_gt_3
     Code: 455 | Criterias: v07_purple_odd, v13_yellow_eq_purple, v24_two_consecutive_asc, v32_yellow_gt_3
