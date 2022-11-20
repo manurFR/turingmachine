@@ -4,8 +4,8 @@ This will run on Python 3.x.
 
 This program is dedicated to the **Turing Machine** boardgame, released by Le Scorpion Masqué in 2022.
 
-It will generate new Problems for the game, and can also solve existing problems. Like official problems, the generated games will all have 
-only ONE possible solution (ie. one valid code that checks all verifiers).
+It will generate new Problems for the game (either one of a pdf booklet), and can also solve existing problems. 
+Like official problems, the generated games will all have only ONE possible solution (ie. one valid code that checks all verifiers).
 
 ## Usage : generating a new Problem
 
@@ -42,6 +42,12 @@ under numbers A: 613 | B: 224 | C: 595 | D: 439 | E: 406.
 The answer (the code and the relevant criteria that each verifier tests) will only be printed after your confirmation.
 
 ## Usage : generating a pdf booklet of problems
+
+**Warning**: This requires the fpdf2 external library. Install it (preferably in a virtualenv) with the command:
+
+    $ python -m pip install fpdf2
+
+Then:
 
     $ python turing.py --generate-booklet
 

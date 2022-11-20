@@ -2,7 +2,12 @@ import os
 import random
 from itertools import product
 
-from fpdf import FPDF
+try:
+    from fpdf import FPDF
+except ImportError:
+    FPDF = object  # hack to allow compilation of class BookletPDF
+    print("WARNING: the python fpdf2 library is required to use --generate-booklet. "
+          "Do \"python -m pip install fpdf2\".")
 
 from checkcards import SYMBOLS, CHECK_CARDS
 from problem import generate_game, MAPPING_DIFFICULTY

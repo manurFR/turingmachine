@@ -1,5 +1,6 @@
 import argparse
 import random
+import sys
 from itertools import product
 
 from booklet import generate_games, prepare_booklet
@@ -83,6 +84,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.generate_booklet:
+        if 'fpdf' not in sys.modules:
+            print("Aborting.")
+            sys.exit(1)
         problems = generate_games()
         prepare_booklet(problems)
     elif args.getcodes:
