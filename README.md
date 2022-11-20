@@ -41,6 +41,12 @@ under numbers A: 613 | B: 224 | C: 595 | D: 439 | E: 406.
 
 The answer (the code and the relevant criteria that each verifier tests) will only be printed after your confirmation.
 
+## Usage : generating a pdf booklet of problems
+
+    $ python turing.py --generate-booklet
+
+This will generate a pdf booklet with 9 pages of 15 random games each, for every combination of 4, 5 or 6 verifiers and diificulties EASY, STANDARD or HARD.  
+
 ## Usage : finding all valid solutions for a set of verifiers
 
     $ python turing.py --getcodes 7 13 24 32
