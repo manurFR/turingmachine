@@ -4,8 +4,9 @@ This will run on Python 3.x.
 
 This program is dedicated to the **Turing Machine** boardgame, released by Le Scorpion Masqué in 2022.
 
-It will generate new Problems for the game (either one of a pdf booklet), and can also solve existing problems. 
-Like official problems, the generated games will all have only ONE possible solution (ie. one valid code that checks all verifiers).
+It will generate new Problems for the game (either one problem, or a full pdf booklet with more than 100 games). IT can also solve existing problems.
+
+Like official problems, every generated games will have only ONE possible solution (ie. one valid code that checks all verifiers).
 
 ## Usage : generating a new Problem
 
@@ -14,7 +15,10 @@ Like official problems, the generated games will all have only ONE possible solu
     difficulty : EASY, STANDARD or HARD
     --include-verifiers : optional, add here the number of the verifier(s) you require in your game (space separated)
 
-Note : EASY difficulty include only verifiers 1 to 17 ; STANDARD only verifiers 1 to 22 ; HARD include all verifiers from 1 to 48.
+Note : 
+* EASY difficulty include only verifiers 1 to 17; 
+* STANDARD only verifiers 1 to 22; 
+* HARD include all verifiers from 1 to 48.
 
 ### Examples :
 
@@ -51,7 +55,7 @@ Then:
 
     $ python turing.py --generate-booklet
 
-This will generate a pdf booklet with 9 pages of 15 random games each, for every combination of 4, 5 or 6 verifiers and diificulties EASY, STANDARD or HARD.  
+This will generate a pdf booklet with 9 pages of 15 random games each, for every combination of 4, 5 or 6 verifiers and difficulties EASY, STANDARD or HARD.  
 
 ## Usage : finding all valid solutions for a set of verifiers
 
