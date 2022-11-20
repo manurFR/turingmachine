@@ -4,7 +4,7 @@ This will run on Python 3.x.
 
 This program is dedicated to the **Turing Machine** boardgame, released by Le Scorpion Masqué in 2022.
 
-It will generate new Problems for the game (either one problem, or a full pdf booklet with more than 100 games). IT can also solve existing problems.
+It will generate new Problems for the game (either one problem, or a full pdf booklet with more than 100 games). It can also solve existing problems.
 
 Like official problems, every generated games will have only ONE possible solution (ie. one valid code that checks all verifiers).
 
