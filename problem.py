@@ -3,7 +3,7 @@ import sys
 from copy import copy
 from itertools import chain, combinations
 
-from verifiers import VERIFIERS, Code
+from verifiers import VERIFIERS
 
 MAX_TRIES = 10000
 
@@ -18,6 +18,19 @@ MAX_VERIFIERS_BY_DIFF = {
     DIFF_STANDARD: 22,  # two stars difficulty (up to verifier 22)
     DIFF_HARD: 48       # three stars difficulty (all verifiers)
 }
+
+
+class Code(object):
+    def __init__(self, blue, yellow, purple):
+        self.blue = blue
+        self.yellow = yellow
+        self.purple = purple
+
+    def __str__(self):
+        return f"{self.blue}{self.yellow}{self.purple}"
+
+    def __repr__(self):
+        return f"{self.blue}{self.yellow}{self.purple}"
 
 
 def generate_game(nb_verif=4, diff=DIFF_EASY, include_verifiers=None, include_criterias=None):

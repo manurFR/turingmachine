@@ -1,19 +1,5 @@
 from re import match
 
-
-class Code(object):
-    def __init__(self, blue, yellow, purple):
-        self.blue = blue
-        self.yellow = yellow
-        self.purple = purple
-
-    def __str__(self):
-        return f"{self.blue}{self.yellow}{self.purple}"
-
-    def __repr__(self):
-        return f"{self.blue}{self.yellow}{self.purple}"
-
-
 VERIFIERS = {
     1: {
         "v01_blue_eq_1": {"crit": lambda grid: [code for code in grid if code.blue == 1], "checkcard": 46},
@@ -252,7 +238,7 @@ VERIFIERS = {
                                                             if code.yellow >= code.blue and code.yellow >= code.purple],
                                       "checkcard": 90},
         "v35_purple_ge_blue_yellow": {"crit": lambda grid: [code for code in grid
-                                                            if code.purple >= code.blue and code.purple >= code.yellow]},
+                                                            if code.purple >= code.blue and code.purple >= code.yellow]}
     },
     36: {
         "v36_sum_is_multiple_of_3": {"crit": lambda grid: [code for code in grid
