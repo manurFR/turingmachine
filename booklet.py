@@ -32,6 +32,7 @@ SMOKE = (242, 242, 242)
 CINNABAR = (230, 67, 34)
 MARIGOLD = (183, 127, 57)
 EUCALYPTUS = (47, 174, 94)
+DELUGE = (125, 116, 151)
 
 SYMBOLS_PROP = {
     "lozenge":  {"color": (45, 167, 90),   "unicode": "\N{LOZENGE}",       "size": 11},
@@ -115,18 +116,44 @@ class BookletPDF(FPDF):
             self.text(x+25.5, vy-4, SYMBOLS_PROP[symbol]["unicode"])
             vy += FRAME_VERIFIER_SPACE
 
+    def add_solutions(self, games):
+        self.add_page()
+        self.print_title("Solutions")
+        self.cell(w=0, h=10, new_x="LMARGIN", new_y="NEXT")
+        # noinspection PyShadowingNames
+        for (nb_verif, difficulty), problems in games.items():
+            # section
+            self.set_text_color(*CINNABAR)
+            self.set_font("helvetica", 'B', size=12)
+            section = f"Number of verifiers: {nb_verif} | Difficulty: {difficulty}"
+            self.cell(w=TITLE_W, h=3, txt=section, align='L', new_x="LMARGIN", new_y="NEXT")
+            self.cell(w=2, h=0, new_x="RIGHT")  # left indent
+            # solutions
+            for idx, pb in enumerate(problems):
+                self.set_text_color(*CINNABAR)
+                self.set_font("helvetica", 'B', size=9.5)
+                self.cell(w=5.2, h=10, txt=f"{idx+1:02d}:", new_x="RIGHT")
+                self.set_text_color(*DELUGE)
+                self.set_font("helvetica", size=9.5)
+                self.cell(w=7, h=10, txt=f"{pb['code']}", new_x="RIGHT")
+            self.cell(w=0, h=14, new_x="LMARGIN", new_y="NEXT")  # line break
+
     def footer(self):
         self.set_y(-12)  # -1.2cm from bottom
         self.set_font("helvetica", "I", 8)
         self.set_text_color(*BLACK)
-        self.cell(0, 10, f"Page {self.page_no()}/{{nb}} - Generated with https://github.com/manurFR/turingmachine",
-                  align="C")
+        footertext = f"Page {self.page_no()}/{{nb}} - Generated with https://github.com/manurFR/turingmachine"
+        # noinspection PyUnresolvedReferences
+        if not self.lastpage:
+            footertext += f" - solutions on last page"
+        self.cell(0, 10, footertext, align="C")
 
 
 def prepare_booklet(games):
     print("Generating booklet")
     # noinspection PyTypeChecker
     pdf = BookletPDF(format=(210, 210))  # 21x21 cm
+    pdf.lastpage = False
     pdf.set_display_mode(zoom='fullpage')
     pdf.set_top_margin(0)
     pdf.add_font("everson", "B", "font/EversonMonoBold.ttf")
@@ -138,7 +165,9 @@ def prepare_booklet(games):
             x = 20 + (idx % PROBLEMS_BY_ROW) * (FRAME_W + FRAME_PADDING)
             y = 28 + int(idx / PROBLEMS_BY_ROW) * (get_frame_height(nb_verif) + FRAME_PADDING)
             pdf.print_game(idx, nb_verif, difficulty, pb, x, y)
+    pdf.add_solutions(games)
     outputfile = available_filename()
+    pdf.lastpage = True  # this must be declared here because the last footer() call is actually made in output()
     pdf.output(outputfile)
     print(f"Booklet generated as {outputfile}.")
 
