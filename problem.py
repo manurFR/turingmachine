@@ -48,11 +48,20 @@ def generate_game(nb_verif=4, diff=DIFF_EASY, include_verifiers=None, include_cr
         tries += 1
         verifiers = copy(base_verifiers)
 
+        first_pick = True
         while len(verifiers) < nb_verif:
+            # on difficulties STANDARD or HARD, at least one verifier must be inside the corresponding category
+            if first_pick and diff == DIFF_STANDARD:
+                min_range = MAX_VERIFIERS_BY_DIFF[DIFF_EASY] + 1
+            elif first_pick and diff == DIFF_HARD:
+                min_range = MAX_VERIFIERS_BY_DIFF[DIFF_STANDARD] + 1
+            else:
+                min_range = 1
             choice = -1
             while choice == -1 or choice in verifiers:
-                choice = random.choice(range(1, MAX_VERIFIERS_BY_DIFF[diff] + 1))
+                choice = random.choice(range(min_range, MAX_VERIFIERS_BY_DIFF[diff] + 1))
             verifiers.append(choice)
+            first_pick = False
         verifiers.sort()
 
         criterias_name, criterias_func = [], []
