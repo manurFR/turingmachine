@@ -87,10 +87,9 @@ def generate_game(nb_verif=4, diff=DIFF_EASY, include_verifiers=None, include_cr
             else:
                 choice = random.choice(available_criterias)
 
-            # temp hack to exclude criterias for which I haven't found the checkcard yet
+            # I'm almost sure that a few criterias don't actually have a corresponding checkcard! Avoid these.
             while "checkcard" not in VERIFIERS[verif][choice]:
                 choice = random.choice(available_criterias)
-            # --
 
             criterias_name.append(choice)
             criterias_func.append(VERIFIERS[verif][choice]["crit"])

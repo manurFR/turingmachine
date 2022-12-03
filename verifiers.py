@@ -172,9 +172,11 @@ VERIFIERS = {
                                                                  if match(r"([^35][^35])", consec(code))],
                                            "checkcard": 16},
         "v25_two_consecutive_asc_desc":   {"crit": lambda grid: [code for code in grid
-                                                                 if match(r"(3[^3]|[^3]3|5[^5]|[^5]5)", consec(code))]},
+                                                                 if match(r"(3[^3]|[^3]3|5[^5]|[^5]5)", consec(code))],
+                                           "checkcard": 87},
         "v25_three_consecutive_asc_desc": {"crit": lambda grid: [code for code in grid
-                                                                 if consec(code) in ('33', '55')]},  # 507 / 582
+                                                                 if consec(code) in ('33', '55')],
+                                           "checkcard": 49},
     },
     26: {
         "v26_blue_lt_3":   {"crit": lambda grid: [code for code in grid if code.blue < 3], "checkcard": 92},
@@ -416,16 +418,9 @@ def evens(code): return str(code).count('2') + str(code).count('4')
 def odds(code): return str(code).count('1') + str(code).count('3') + str(code).count('5')
 def consec(code): return f"{4 + code.yellow - code.blue}{4 + code.purple - code.yellow}"
 
-# === NOT YET ATTRIBUTED :( ==
+# === CRITERIAS without a corresponding CHECKCARD OMG! ===
 
-# -- Criterias --
 # three_ones
 # three_threes
 # three_fours
-# two_consecutive_asc_desc
-# three_consecutive_asc_desc # maybe 507 ?
 # purple_ge_blue_yellow
-
-# -- Check cards --
-# lozenge 507 (49)
-# lozenge 746 (87)

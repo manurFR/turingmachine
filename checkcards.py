@@ -48,7 +48,7 @@ CHECK_CARDS = {
     46: {"lozenge": 491, "pound": 530, "slash": 495, "currency": 527},  # blue_eq_1
     47: {"lozenge": 497, "pound": 523, "slash": 499, "currency": 518},  # no_twin
     48: {"lozenge": 503, "pound": 515, "slash": 505, "currency": 509},  # evens_lt_odds
-    49: {"lozenge": 507, "pound": 506, "slash": 514, "currency": 504},
+    49: {"lozenge": 507, "pound": 506, "slash": 514, "currency": 504},  # three_consecutive_asc_desc
     50: {"lozenge": 516, "pound": 502, "slash": 520, "currency": 498},  # no_repeat
     51: {"lozenge": 525, "pound": 496, "slash": 528, "currency": 492},  # no_evens
     52: {"lozenge": 532, "pound": 490, "slash": 534, "currency": 486},  # yellow_odd
@@ -86,7 +86,7 @@ CHECK_CARDS = {
     84: {"lozenge": 723, "pound": 289, "slash": 726, "currency": 287},  # blue_gt_yellow
     85: {"lozenge": 737, "pound": 279, "slash": 739, "currency": 277},  # blue_eq_yellow
     86: {"lozenge": 741, "pound": 273, "slash": 743, "currency": 268},  # one_double
-    87: {"lozenge": 746, "pound": 266, "slash": 749, "currency": 263},
+    87: {"lozenge": 746, "pound": 266, "slash": 749, "currency": 263},  # two_consecutive_asc_desc
     88: {"lozenge": 751, "pound": 257, "slash": 755, "currency": 255},  # blue_plus_yellow_eq_6
     89: {"lozenge": 758, "pound": 252, "slash": 763, "currency": 247},  # blue_even
     90: {"lozenge": 766, "pound": 243, "slash": 769, "currency": 236},  # yellow_ge_blue_purple ?
