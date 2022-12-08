@@ -58,7 +58,7 @@ def determine_checkcards(verifiers, symbol, checkcards, solution):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Generate problems for Turing Machine',
+    parser = argparse.ArgumentParser(description='Unofficial problem generator for Turing Machine',
                                      usage="%(prog)s [-h] { --generate-booklet | --getcodes VERIFIER [VERIFIER ...] | "
                                            "nb_verif [{EASY,STANDARD,HARD} "
                                            "[--include-verifiers VERIFIER [VERIFIER ...]] }",

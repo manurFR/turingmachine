@@ -50,6 +50,7 @@ def generate_games():
     print("Generating games")
     print("Please wait", end='', flush=True)
     games = {}
+    # for nb_verif, difficulty in product([6], ["EASY"]):
     for nb_verif, difficulty in product([4, 5, 6], MAPPING_DIFFICULTY.keys()):
         games[(nb_verif, difficulty)] = [generate_game(nb_verif, MAPPING_DIFFICULTY[difficulty])
                                          for _ in range(PROBLEMS_BY_PAGE)]
@@ -64,7 +65,7 @@ class BookletPDF(FPDF):
     def header(self):
         self.set_font("helvetica", size=12)
         self.set_text_color(*BLACK)
-        self.cell(0, 20, txt="Turing Machine", align="C", new_x="LMARGIN", new_y="NEXT")
+        self.cell(0, 20, txt="Turing Machine - Unofficial challenges", align="C", new_x="LMARGIN", new_y="NEXT")
 
     def print_title(self, title):
         self.set_fill_color(*CINNABAR)
@@ -139,14 +140,17 @@ class BookletPDF(FPDF):
             self.cell(w=0, h=14, new_x="LMARGIN", new_y="NEXT")  # line break
 
     def footer(self):
-        self.set_y(-12)  # -1.2cm from bottom
+        self.set_y(-10)
         self.set_font("helvetica", "I", 8)
         self.set_text_color(*BLACK)
         footertext = f"Page {self.page_no()}/{{nb}} - Generated with https://github.com/manurFR/turingmachine"
         # noinspection PyUnresolvedReferences
         if not self.lastpage:
             footertext += f" - solutions on last page"
-        self.cell(0, 10, footertext, align="C")
+        self.cell(0, 4, footertext, align="C", new_x="LMARGIN", new_y="NEXT")
+        self.set_font("helvetica", "I", 6)
+        self.cell(0, 4, "This is fan produced content. It was not made by Scorpion Masqué nor the game authors.",
+                  align="C")
 
 
 def prepare_booklet(games):
