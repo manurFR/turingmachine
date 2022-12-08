@@ -80,15 +80,20 @@ if __name__ == "__main__":
     parser.add_argument('--getcodes', nargs='+', metavar='VERIFIER',
                         help='find all the codes that match the list of one or more verifiers given as parameters '
                              '(aka cheat mode!) - if present, does not generate a problem')
+    parser.add_argument('--seed', help=argparse.SUPPRESS)
 
     args = parser.parse_args()
+
+    # take the given seed if provided... or randomly generate it (isn't it ironic, don't you think?)
+    random_seed = args.seed if args.seed else random.randrange(99999999)
+    random.seed(random_seed)
 
     if args.generate_booklet:
         if 'fpdf' not in sys.modules:
             print("Aborting.")
             sys.exit(1)
         problems = generate_games()
-        prepare_booklet(problems)
+        prepare_booklet(problems, random_seed)
     elif args.getcodes:
         codes_for_verifiers(list(int(v) for v in args.getcodes))
     else:

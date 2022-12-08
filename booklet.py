@@ -29,6 +29,7 @@ FRAME_PADDING = 3.5
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 SMOKE = (242, 242, 242)
+GRAY = (128, 128, 128)
 CINNABAR = (230, 67, 34)
 MARIGOLD = (183, 127, 57)
 EUCALYPTUS = (47, 174, 94)
@@ -152,8 +153,14 @@ class BookletPDF(FPDF):
         self.cell(0, 4, "This is fan produced content. It was not made by Scorpion Masqué nor the game authors.",
                   align="C")
 
+    def add_seed(self, seed):
+        self.set_font("helvetica", size=7)
+        self.set_text_color(*GRAY)
+        with self.rotation(90, 105, 105):
+            self.text(185, 6, f"seed: {seed}")
 
-def prepare_booklet(games):
+
+def prepare_booklet(games, seed):
     print("Generating booklet")
     # noinspection PyTypeChecker
     pdf = BookletPDF(format=(210, 210))  # 21x21 cm
@@ -170,6 +177,7 @@ def prepare_booklet(games):
             y = 28 + int(idx / PROBLEMS_BY_ROW) * (get_frame_height(nb_verif) + FRAME_PADDING)
             pdf.print_game(idx, nb_verif, difficulty, pb, x, y)
     pdf.add_solutions(games)
+    pdf.add_seed(seed)
     outputfile = available_filename()
     pdf.lastpage = True  # this must be declared here because the last footer() call is actually made in output()
     pdf.output(outputfile)
@@ -188,4 +196,4 @@ def available_filename():
 
 if __name__ == "__main__":
     problems = generate_games()
-    prepare_booklet(problems)
+    prepare_booklet(problems, random.randrange(99999999))
