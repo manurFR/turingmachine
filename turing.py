@@ -1,11 +1,10 @@
 import argparse
 import random
 import sys
-from itertools import product
 
 from booklet import generate_games, prepare_booklet
 from checkcards import CHECK_CARDS, SYMBOLS
-from problem import generate_game, test_criterias, MAPPING_DIFFICULTY
+from problem import generate_game, MAPPING_DIFFICULTY, find_all_solutions
 from verifiers import VERIFIERS
 
 
@@ -24,28 +23,18 @@ def display_code(problem):
     print(f"Code: {problem['code']}")
 
 
-def codes_for_verifiers(verifiers):
-    # loop over all possible criteria permutations
-    solutions = {}
-    for criterias in product(*[VERIFIERS[v] for v in verifiers]):
-        crit_funcs = [VERIFIERS[v][crit_name]["crit"] for v, crit_name in zip(verifiers, criterias)]
-        code = test_criterias(crit_funcs)
-        if code:
-            if str(code) in solutions:
-                solutions[str(code)].append(criterias)
-            else:
-                solutions[str(code)] = [criterias]
+def get_codes(verifiers):
+    solutions = find_all_solutions(verifiers)
     if solutions:
         for code in sorted(solutions.keys()):
             for criterias in solutions[code]:
                 print(f"Code: {code} | Criterias: {', '.join(criterias)}")
     else:
         print("Sorry, no solutions found for this set of verifiers.")
-    return solutions
 
 
 def determine_checkcards(verifiers, symbol, checkcards, solution):
-    solutions = codes_for_verifiers(verifiers)
+    solutions = find_all_solutions(verifiers)
     for nb, criterias in enumerate(solutions[str(solution)]):
         print(f"Solution #{nb + 1} ===")
         for card, crit in zip(checkcards, criterias):
@@ -95,7 +84,7 @@ if __name__ == "__main__":
         problems = generate_games()
         prepare_booklet(problems, random_seed)
     elif args.getcodes:
-        codes_for_verifiers(list(int(v) for v in args.getcodes))
+        get_codes(list(int(v) for v in args.getcodes))
     else:
         game = generate_game(args.nb_verif,
                              MAPPING_DIFFICULTY[args.difficulty],

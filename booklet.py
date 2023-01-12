@@ -1,5 +1,6 @@
 import os
 import random
+import timeit
 from itertools import product
 
 try:
@@ -50,6 +51,7 @@ def get_frame_height(nb_verif):
 def generate_games():
     print("Generating games")
     print("Please wait", end='', flush=True)
+    start = timeit.default_timer()
     games = {}
     # for nb_verif, difficulty in product([6], ["EASY"]):
     for nb_verif, difficulty in product([4, 5, 6], MAPPING_DIFFICULTY.keys()):
@@ -57,7 +59,8 @@ def generate_games():
                                          for _ in range(PROBLEMS_BY_PAGE)]
         print('.', end='', flush=True)
     print(flush=True)
-    print("Games generated")
+    end = timeit.default_timer()
+    print(f"Games generated ({(end - start):.2f} seconds elapsed)")
     print()
     return games
 

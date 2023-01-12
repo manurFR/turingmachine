@@ -1,7 +1,7 @@
 import random
 import sys
 from copy import copy
-from itertools import chain, combinations
+from itertools import chain, combinations, product
 
 from verifiers import VERIFIERS
 
@@ -96,7 +96,17 @@ def generate_game(nb_verif=4, diff=DIFF_EASY, include_verifiers=None, include_cr
 
         code = test_criterias(criterias_func)
         if code:
-            break
+            # We have found a valid set of criterias that has only one solution.
+            # But let's exclude this set of verifiers if it is a "singleton".
+            # I call singleton a set of verifiers which has *only* one combination of criterias offering one solution
+            # (put more simply, a set that would produce only one solution with --getcodes, like pb 09 from the rules).
+            # Theoretically, this kind of set can be solved only by deduction, without asking a single question,
+            # since you could try all combinations of the candidate criterias on paper and find that
+            # only one has one solution (and in practice, there may be logical shortcuts like shown in
+            # https://boardgamegeek.com/thread/3006654/).
+            solutions = find_all_solutions(verifiers)
+            if len(solutions) != 1:
+                break
 
         if tries >= MAX_TRIES:
             print(f"Sorry, I didn't found a valid game after {MAX_TRIES} tries. Aborting.")
@@ -139,3 +149,17 @@ def one_solution(criterias):
         return grid[0]
     else:
         return None
+
+
+def find_all_solutions(verifiers):
+    # loop over all possible criteria permutations
+    solutions = {}
+    for criterias in product(*[VERIFIERS[v] for v in verifiers]):
+        crit_funcs = [VERIFIERS[v][crit_name]["crit"] for v, crit_name in zip(verifiers, criterias)]
+        code = test_criterias(crit_funcs)
+        if code:
+            if str(code) in solutions:
+                solutions[str(code)].append(criterias)
+            else:
+                solutions[str(code)] = [criterias]
+    return solutions
