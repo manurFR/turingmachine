@@ -96,13 +96,13 @@ def generate_game(nb_verif=4, diff=DIFF_EASY, include_verifiers=None, include_cr
 
         code = test_criterias(criterias_func)
         if code:
-            # We have found a valid set of criterias that has only one solution.
-            # But let's exclude this set of verifiers if it is a "singleton".
-            # I call singleton a set of verifiers which has *only* one combination of criterias offering one solution
+            # We have found a satisfying set of criterias, ie. one that has only one solution.
+            # But -- nevertheless -- we will exclude this set of verifiers if it is a "singleton".
+            # I call singleton a set of verifiers which has *only* one *satisfying* combination of criterias
             # (put more simply, a set that would produce only one solution with --getcodes, like pb 09 from the rules).
-            # Theoretically, this kind of set can be solved only by deduction, without asking a single question,
+            # Theoretically, this kind of set can be solved by deduction only, ie. without asking a single question,
             # since you could try all combinations of the candidate criterias on paper and find that
-            # only one has one solution (and in practice, there may be logical shortcuts like shown in
+            # only one of them has one solution (and in practice, there may be logical shortcuts like shown in
             # https://boardgamegeek.com/thread/3006654/).
             solutions = find_all_solutions(verifiers)
             if len(solutions) != 1:
