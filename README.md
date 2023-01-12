@@ -55,7 +55,9 @@ Then:
 
     $ python turing.py --generate-booklet
 
-This will generate a pdf booklet with 9 pages of 15 random games each, for every combination of 4, 5 or 6 verifiers and difficulties EASY, STANDARD or HARD.  
+This will generate a pdf booklet with 9 pages of 15 random games each, for every combination of 4, 5 or 6 verifiers and difficulties EASY, STANDARD or HARD.
+
+_Note:_ It will take 2 to 5 minutes to find 135 valid and interesting problems, depending on your machine. Please be patient.
 
 ## Usage : finding all valid solutions for a set of verifiers
 

@@ -65,7 +65,8 @@ if __name__ == "__main__":
                         help='number(s) of one or more verifiers to force in the problem')
     parser.add_argument('--include-criterias', nargs='+', metavar='CRITERIA', help=argparse.SUPPRESS)
     parser.add_argument('--generate-booklet', action='store_true',
-                        help="create a pdf booklet with many games for each number of verifier and difficulty")
+                        help="create a pdf booklet with many games for each number of verifier and difficulty "
+                             "(needs a few minutes to complete)")
     parser.add_argument('--getcodes', nargs='+', metavar='VERIFIER',
                         help='find all the codes that match the list of one or more verifiers given as parameters '
                              '(aka cheat mode!) - if present, does not generate a problem')
